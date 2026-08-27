@@ -1,87 +1,92 @@
-<h1 align=center>Libft</h1>
+<h1 align="center">libft</h1>
+
 <p align="center">
-  <img src="readme_img/project_image.png?raw=true" alt="libft Project Image"/>
+  <img src="https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white" alt="C"/>
+  <img src="https://img.shields.io/badge/GNU%20Make-A42E2B?style=for-the-badge&logo=gnu&logoColor=white" alt="GNU Make"/>
 </p>
 
 <p align="center">
-  <img src="readme_img/ft_punumber_fd_code_example.png" alt="Ft_libft Project Image"/>
+  <img src="readme_img/project_image.png?raw=true" width="600" alt="libft project banner"/>
 </p>
 
-##  **📌 Description**
-**Libft** est le premier projet du tronc commun à l'école 42. Il consiste à recréer une librairie C contenant des fonctions de base réimplémentées depuis zéro, ainsi qu'un ensemble de fonctions supplémentaires utiles pour les projets futurs.
+<p align="center"><strong>A from-scratch C standard library: the string, memory, conversion and linked-list routines every later project builds on.</strong></p>
 
-Ce projet sert de fondation pour tous les autres projets en C du cursus 42.
+---
 
-## **🎯 Objectifs**
-- Comprendre le fonctionnement des fonctions standards du C
-- Apprendre à créer une bibliothèque statique
-- Maîtriser l'allocation mémoire et la manipulation de chaînes
-- Préparer une base de code réutilisable pour les projets suivants
-- Respecter strictement la norme 42 (style de code)
-- Réaliser un Makefile
+## 📌 Overview
 
-## **📝 Fonctions à implémenter**
+Almost no C program is written without `strlen`, `memcpy`, `atoi` or a `malloc`-backed helper somewhere underneath it, and almost no one who calls them has looked at how they behave on an empty string, a null pointer or an overlapping copy. libft is the first project of the 42 common core and it closes that gap: reimplement that core by hand, ship it as a static library, and let the rest of the cursus depend on it.
 
-### Partie 1 - Fonctions Libc
-Reproduction des fonctions de la libc du même nom privé du préfixe `ft_`.
+The library has three parts. The first mirrors a set of `<ctype.h>`, `<string.h>` and `<stdlib.h>` functions under an `ft_` prefix, matching the originals down to their return values and edge cases. The second is a set of higher-level helpers the standard library does not provide: `ft_split`, `ft_strtrim`, `ft_substr`, `ft_itoa`, and the `ft_put*_fd` output functions. The bonus part adds a linked-list toolkit (`ft_lstnew`, `ft_lstadd_back`, `ft_lstmap` and the rest).
 
-`ft_isalpha` `ft_isdigit` `ft_isalnum` `ft_isascii` `ft_isprint` 
-`ft_strlen` `ft_memset` `ft_bzero` `ft_memcpy` `ft_memmove` 
-`ft_strlcpy` `ft_strlcat` `ft_toupper` `ft_tolower` `ft_strchr` 
-`ft_strrchr` `ft_strncmp` `ft_memchr` `ft_memcmp` `ft_strnstr` 
-`ft_atoi` `ft_calloc` `ft_strdup`
+It compiles to `libft.a` through a Makefile that keeps the mandatory and bonus builds separate, and it is the dependency almost every other C project in this account links against.
 
-### Partie 2 - Fonctions supplémentaires
+## 🎯 Objectives
 
-| Fonction | Description |
-|-------------------|-------------|
-| `ft_substr` | Alloue et retourne une sous-chaîne depuis `s` |
-| `ft_strjoin` | Concatène `s1` et `s2` dans une nouvelle chaîne |
-| `ft_strtrim` | Supprime les caractères de `set` au début/fin de `s1` |
-| `ft_split` | Découpe `s` selon le caractère `c`, tableau de chaînes |
-| `ft_itoa` | Convertit un entier `n` en chaîne de caractères |
-| `ft_strmapi` | Applique `f` à chaque caractère de `s` avec son index |
-| `ft_striteri` | Applique `f` à chaque caractère de `s` avec son index |
-| `ft_putchar_fd` | Écrit le caractère `c` sur le file descriptor `fd` |
-| `ft_putstr_fd` | Écrit `s` sur le file descriptor `fd` |
-| `ft_putendl_fd` | Écrit `s` suivi d'un newline sur `fd` |
-| `ft_putnbr_fd` | Écrit l'entier `n` sur le file descriptor `fd` |
+- Reimplement the libc functions faithfully, including their behaviour on empty strings, null pointers and overlapping memory.
+- Build and manage a static library with a Makefile (`all`, `bonus`, `clean`, `fclean`, `re`, `.PHONY`).
+- Handle manual allocation and string manipulation without leaks.
+- Implement a small linked-list API for reuse in later projects.
+- Keep every file within the 42 coding standard.
 
-### Bonus
-Manipulation de listes chaînées.
+## 🛠️ Tech Stack
 
-`ft_lstnew` `ft_lstadd_front` `ft_lstsize` `ft_lstlast` 
-`ft_lstadd_back` `ft_lstdelone` `ft_lstclear` `ft_lstiter` 
-`ft_lstmap`
+<p>
+  <img src="https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white" alt="C"/>
+  <img src="https://img.shields.io/badge/GNU%20Make-A42E2B?style=for-the-badge&logo=gnu&logoColor=white" alt="GNU Make"/>
+</p>
 
-## **⚙️ Compilation & Utilisation**
+## 🚀 Getting Started
 
-### Installation
 ```bash
-git clone git@github.com:acardona123/42_libft.git
+git clone https://github.com/acardona123/42_libft.git
 cd 42_libft
-make bonus
+make        # builds libft.a, mandatory functions only
+make bonus  # same, plus the linked-list functions
 ```
 
-### Commandes Makefile
-- `make` : compile la bibliothèque sans bonus
-- `make bonus` : compile la bibliothèque avec bonus
-- `make clean` : supprime les .o
-- `make fclean` : supprime les .o et libft.a
-- `make re` : recompile entièrement
+## 📖 Usage
 
-### Utilisation dans votre projet
-1. Ajouter `libft.a` et `libft.h` à votre projet
-2. Inclure le header :
+Add `libft.a` and the header to your project, include it, and link with `-lft`:
+
 ```c
 #include "libft.h"
+
+int main(void)
+{
+    char **words = ft_split("the quick brown fox", ' ');
+    ft_putendl_fd(words[2], 1); // brown
+    return (0);
+}
 ```
-3. Compiler avec :
+
 ```bash
-gcc -Wall -Wextra -Werror your_program.c -L. -lft
+cc main.c -L. -lft -I includes -o demo
 ```
 
+<p align="center">
+  <img src="readme_img/ft_punumber_fd_code_example.png" alt="ft_putnbr_fd implementation excerpt"/>
+</p>
 
-## Tests
-Mon testeur libft est disponible sur GitHub:
-[https://github.com/acardona123/42_tester_libft](https://github.com/acardona123/42_tester_libft)
+## 🧪 Tests
+
+Validated against [42_tester_libft](https://github.com/acardona123/42_tester_libft), which runs the full mandatory function set and checks the build against the 42 norm.
+
+## 📁 Structure
+
+```
+includes/libft.h   public header
+src/               one file per function
+src/bonus/         linked-list functions
+test/              local test script
+Makefile
+```
+
+## 📚 Resources
+
+- [cppreference C standard library](https://en.cppreference.com/w/c/header)
+- [Linux man pages: string operations](https://man7.org/linux/man-pages/man3/string.3.html)
+
+---
+
+<p align="center"><sub>🏫 Project from the <strong>42</strong> common core, School 42 Paris.</sub></p>
